@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 720" role="img" aria-labelledby="title desc">
+  <title id="title">Conceptual workflow</title>
+  <desc id="desc">A simplified process diagram showing sample, particle capture, density separation, recovery, and Raman analysis.</desc>
+  <rect width="1400" height="720" fill="#eeeeeb"/>
+  <g fill="none" stroke="#181817" stroke-width="2">
+    <line x1="235" y1="360" x2="335" y2="360"/>
+    <line x1="505" y1="360" x2="605" y2="360"/>
+    <line x1="775" y1="360" x2="875" y2="360"/>
+    <line x1="1045" y1="360" x2="1145" y2="360"/>
+  </g>
+  <g fill="#181817">
+    <path d="M335 360l-18-10v20z"/>
+    <path d="M605 360l-18-10v20z"/>
+    <path d="M875 360l-18-10v20z"/>
+    <path d="M1145 360l-18-10v20z"/>
+  </g>
+  <g fill="#f7f7f5" stroke="#181817" stroke-width="2">
+    <circle cx="150" cy="360" r="85"/>
+    <rect x="345" y="275" width="150" height="170" rx="75"/>
+    <rect x="615" y="255" width="150" height="210" rx="12"/>
+    <circle cx="960" cy="360" r="85"/>
+    <rect x="1155" y="275" width="150" height="170" rx="18"/>
+  </g>
+  <g fill="#181817">
+    <circle cx="118" cy="340" r="13"/>
+    <circle cx="154" cy="376" r="9"/>
+    <circle cx="181" cy="333" r="7"/>
+    <circle cx="395" cy="334" r="11"/>
+    <circle cx="438" cy="375" r="11"/>
+    <circle cx="458" cy="327" r="7"/>
+    <circle cx="420" cy="356" r="5"/>
+    <circle cx="960" cy="360" r="17"/>
+    <circle cx="932" cy="333" r="8"/>
+    <circle cx="990" cy="390" r="8"/>
+  </g>
+  <g stroke="#181817" stroke-width="2" fill="none">
+    <line x1="665" y1="300" x2="715" y2="420"/>
+    <line x1="680" y1="300" x2="730" y2="420"/>
+    <path d="M1180 405h100"/>
+    <path d="M1200 405l26-82h28l26 82"/>
+    <path d="M1226 323v-40"/>
+    <path d="M1212 283h56"/>
+  </g>
+  <g fill="#181817" font-family="Inter, Arial, sans-serif" text-anchor="middle">
+    <text x="700" y="110" font-size="34" font-weight="500">Conceptual workflow</text>
+    <text x="150" y="535" font-size="25">Sample</text>
+    <text x="420" y="535" font-size="25">Particle capture</text>
+    <text x="690" y="535" font-size="25">Density separation</text>
+    <text x="960" y="535" font-size="25">Recovery</text>
+    <text x="1230" y="535" font-size="25">Raman analysis</text>
+  </g>
+</svg>
