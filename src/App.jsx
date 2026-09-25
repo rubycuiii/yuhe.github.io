@@ -88,11 +88,17 @@ function Home() {
 
 function MediaItem({ item }) {
   if (item.needed) return <div className="media-needed" role="img" aria-label={`Image needed: ${item.needed}`}><span>[IMAGE NEEDED]</span><p>{item.needed}</p></div>;
-  return <figure className={`project-figure${item.size ? ` media-${item.size}` : ""}`}>{item.type === "video" ? <video src={assetUrl(item.src)} poster={assetUrl(item.poster)} controls={item.controls !== false} autoPlay={item.autoPlay} loop={item.loop} muted={item.muted} playsInline preload={item.autoPlay ? "auto" : "metadata"} aria-label={item.alt} /> : <img src={assetUrl(item.src)} alt={item.alt} loading="lazy" />}{item.caption && <figcaption>{item.caption}</figcaption>}</figure>;
+  return <figure className={`project-figure${item.size ? ` media-${item.size}` : ""}`}>{item.type === "video" ? <video src={assetUrl(item.src)} poster={assetUrl(item.poster)} controls={item.controls !== false} autoPlay={item.autoPlay} loop={item.loop} muted={item.muted} playsInline preload={item.autoPlay ? "auto" : "metadata"} aria-label={item.alt} /> : <img src={assetUrl(item.src)} alt={item.alt} loading="lazy" />}{(item.caption || item.source) && <figcaption>{item.caption}{item.source && <>{item.caption ? " " : ""}<a href={item.source.href} target="_blank" rel="noreferrer">{item.source.label}</a></>}</figcaption>}</figure>;
 }
 
 function MediaGrid({ media, layout }) {
   return <div className={`media-grid media-count-${media.length}${layout ? ` media-layout-${layout}` : ""}`}>{media.map((item, index) => <MediaItem item={item} key={item.src || item.needed || index} />)}</div>;
+}
+
+function ProjectDocuments({ project }) {
+  const documents = project.documents || (project.document ? [project.document] : []);
+  if (!documents.length) return null;
+  return <div className="document-links">{documents.map((document) => <a className="document-link" href={assetUrl(document.href)} target="_blank" rel="noreferrer" download={document.download || undefined} key={document.href}><span>{document.label}</span><small>{document.meta}</small><b aria-hidden="true">{document.download ? "↓" : "↗"}</b></a>)}</div>;
 }
 
 function Section({ section }) {
@@ -178,7 +184,7 @@ function DimsProjectPage() {
               <small>22.8% with plain silica beads<br />Matched 30-minute incubation</small>
             </div>
             <DimsFigure
-              className="dims-inline-chart"
+              className="dims-inline-chart dims-figure-narrow"
               src="/images/dims/dims-aupeg-capture.png"
               alt="Comparison of E. coli capture using Au-PEG beads and plain silica beads after a matched 30-minute incubation"
             />
@@ -192,7 +198,7 @@ function DimsProjectPage() {
             <p>Comparable capture between the two conditions showed that antibody-mediated binding remained stable under the DIMS separation conditions.</p>
           </div>
           <DimsFigure
-            className="dims-small-chart"
+            className="dims-small-chart dims-figure-narrow"
             src="/images/dims/dims-density-stability.png"
             alt="Capture efficiency comparison in buffer and 1.2 grams per milliliter density media"
             caption="Capture efficiency in buffer versus 1.2 g/mL density media."
@@ -231,6 +237,7 @@ function DimsProjectPage() {
 
         <section className="dims-section dims-split dims-raman-section">
           <DimsFigure
+            className="dims-raman-figure dims-figure-narrow"
             src="/images/dims/dims-raman.png"
             alt="Representative bead-bound E. coli image and Raman spectra compared with bacteria-only and bead-only controls"
             caption="Representative bead-bound E. coli imaging and Raman spectra compared with bacteria-only and bead-only controls."
@@ -290,7 +297,7 @@ function ProjectPage() {
         <div className="project-heading"><p className="eyebrow">{project.category} / {project.year}</p><h1>{project.title}</h1><p className="dek">{project.subtitle || project.shortDescription}</p></div>
         {project.heroImage && <figure className="hero-media"><img src={assetUrl(project.heroImage)} alt={project.heroAlt} /></figure>}
       </header>
-      <section className="overview"><h2>Overview</h2><p>{project.shortDescription}</p><dl>{project.status && <div><dt>Status</dt><dd>{project.status}</dd></div>}<div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Methods / Tools</dt><dd>{project.tools}</dd></div>{project.collaborators && <div><dt>Collaborators</dt><dd>{project.collaborators}</dd></div>}<div><dt>Year</dt><dd>{project.year}</dd></div></dl>{project.document && <a className="document-link" href={assetUrl(project.document.href)} target="_blank" rel="noreferrer"><span>{project.document.label}</span><small>{project.document.meta}</small><b aria-hidden="true">↗</b></a>}</section>
+      <section className="overview"><h2>Overview</h2><p>{project.shortDescription}</p><dl>{project.status && <div><dt>Status</dt><dd>{project.status}</dd></div>}<div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Methods / Tools</dt><dd>{project.tools}</dd></div>{project.collaborators && <div><dt>Collaborators</dt><dd>{project.collaborators}</dd></div>}<div><dt>Year</dt><dd>{project.year}</dd></div></dl><ProjectDocuments project={project} /></section>
       <div className="case-study">{project.sections.map((section) => <Section section={section} key={section.number + section.title} />)}</div>
       <nav className="project-end" aria-label="Case study navigation"><Link to="/">← All work</Link><Link to="/about">About Yuhe →</Link></nav>
       <Footer />
