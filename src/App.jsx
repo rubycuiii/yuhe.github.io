@@ -88,7 +88,7 @@ function Home() {
 
 function MediaItem({ item }) {
   if (item.needed) return <div className="media-needed" role="img" aria-label={`Image needed: ${item.needed}`}><span>[IMAGE NEEDED]</span><p>{item.needed}</p></div>;
-  return <figure className="project-figure">{item.type === "video" ? <video src={assetUrl(item.src)} poster={assetUrl(item.poster)} controls playsInline preload="metadata" aria-label={item.alt} /> : <img src={assetUrl(item.src)} alt={item.alt} loading="lazy" />}{item.caption && <figcaption>{item.caption}</figcaption>}</figure>;
+  return <figure className={`project-figure${item.size ? ` media-${item.size}` : ""}`}>{item.type === "video" ? <video src={assetUrl(item.src)} poster={assetUrl(item.poster)} controls playsInline preload="metadata" aria-label={item.alt} /> : <img src={assetUrl(item.src)} alt={item.alt} loading="lazy" />}{item.caption && <figcaption>{item.caption}</figcaption>}</figure>;
 }
 
 function MediaGrid({ media }) {
@@ -112,7 +112,7 @@ function ProjectPage() {
   const project = projectBySlug[slug];
   if (!project) return <Navigate to="/" replace />;
   return (
-    <main className="project-page">
+    <main className={`project-page${researchOrder.includes(project.slug) ? " project-page-research" : ""}`}>
       <header className="project-hero">
         <div className="project-heading"><p className="eyebrow">{project.category} / {project.year}</p><h1>{project.title}</h1><p className="dek">{project.subtitle || project.shortDescription}</p></div>
         {project.heroImage && <figure className="hero-media"><img src={assetUrl(project.heroImage)} alt={project.heroAlt} /></figure>}
@@ -134,6 +134,7 @@ function About() {
         <h2>Publications</h2>
         <article><time>2025</time><a className="publication-link" href="https://doi.org/10.1371/journal.pone.0311242" target="_blank" rel="noreferrer"><p><strong>MCount: An automated colony counting tool for high-throughput microbiology.</strong><span>Chen, S., Huang, P.-H., Kim, H., Cui, Y., &amp; Buie, C. R. · PLOS ONE 20(3), e0311242.</span></p><b aria-hidden="true">↗</b></a></article>
         <article><time>2023</time><a className="publication-link" href="https://doi.org/10.1145/3594806.3594860" target="_blank" rel="noreferrer"><p><strong>TOUCH: A multi-sensory communication system that communicates emotions.</strong><span>Aguiar, C. A., Guo, Z., &amp; Cui, Y. · ACM PETRA ’23, 347–356.</span></p><b aria-hidden="true">↗</b></a></article>
+        <article><time>2023</time><a className="publication-link" href="https://amps-research.com/wp-content/uploads/2023/07/Amps-Proceedings-Series-32.pdf" target="_blank" rel="noreferrer"><p><strong>Dymo: A future dynamic micro-mobility transportation system.</strong><span>Aguiar, C. A., Guo, Z., &amp; Cui, Y. · AMPS: Representing Pasts – Visioning Futures. ISSN 2398-9467.</span></p><b aria-hidden="true">↗</b></a></article>
         <article><time>2022</time><a className="publication-link" href="https://doi.org/10.1093/icb/icac101" target="_blank" rel="noreferrer"><p><strong>An adaptable flying fish robotic model for aero- and hydrodynamic experimentation.</strong><span>Saro-Cortes, V., Cui, Y., Dufficy, T., Boctor, A., Flammang, B. E., &amp; Wissa, A. W. · Integrative and Comparative Biology 62(5), 1202–1216.</span></p><b aria-hidden="true">↗</b></a></article>
         <article><time>2022</time><a className="publication-link" href="https://doi.org/10.1109/IE54923.2022.9826782" target="_blank" rel="noreferrer"><p><strong>Doki: A multi-sensation interaction device that communicates emotions.</strong><span>Cui, Y., Guo, Z., Wang, Y., Peng, X., Aguiar, C., &amp; Park, J. · IEEE Intelligent Environments 2022, 1–4.</span></p><b aria-hidden="true">↗</b></a></article>
       </section>
