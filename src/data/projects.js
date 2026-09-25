@@ -91,7 +91,7 @@ export const projects = [
     heroAlt: "Flow-through electroporation concept with syringe-needle electrodes and a geometry-tunable microchannel",
     documents: [
       { href: "/downloads/scalable-microfluidic-platforms-bacterial-gene-delivery.pptx", label: "Download the research presentation", meta: "PowerPoint · 42 MB", download: true },
-      { href: "/downloads/microtas-2025-electroporation-poster.pptm", label: "Download the MicroTAS 2025 poster", meta: "PowerPoint · 16 MB", download: true },
+      { href: "/downloads/microtas-2025-electroporation-poster.pdf", label: "Download the MicroTAS 2025 poster", meta: "PDF · 0.8 MB", download: true },
     ],
     sections: [
       { number: "01", title: "Why bacterial gene delivery needs scale", body: ["Bacterial transformation supports engineered biomanufacturing, therapeutic production, and strain development. Yet most electroporation still happens in microliter-scale cuvettes, making larger experiments slow and difficult to reproduce."], media: [{ src: "/images/research-story/electroporation-applications.png", alt: "Applications of bacterial gene delivery in biomanufacturing, therapeutics, and agriculture", caption: "Bacterial gene delivery connects laboratory transformation to manufacturing, therapeutics, and resilient crops.", size: "compact" }] },
