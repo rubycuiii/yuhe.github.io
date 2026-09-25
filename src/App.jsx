@@ -88,22 +88,194 @@ function Home() {
 
 function MediaItem({ item }) {
   if (item.needed) return <div className="media-needed" role="img" aria-label={`Image needed: ${item.needed}`}><span>[IMAGE NEEDED]</span><p>{item.needed}</p></div>;
-  return <figure className={`project-figure${item.size ? ` media-${item.size}` : ""}`}>{item.type === "video" ? <video src={assetUrl(item.src)} poster={assetUrl(item.poster)} controls playsInline preload="metadata" aria-label={item.alt} /> : <img src={assetUrl(item.src)} alt={item.alt} loading="lazy" />}{item.caption && <figcaption>{item.caption}</figcaption>}</figure>;
+  return <figure className={`project-figure${item.size ? ` media-${item.size}` : ""}`}>{item.type === "video" ? <video src={assetUrl(item.src)} poster={assetUrl(item.poster)} controls={item.controls !== false} autoPlay={item.autoPlay} loop={item.loop} muted={item.muted} playsInline preload={item.autoPlay ? "auto" : "metadata"} aria-label={item.alt} /> : <img src={assetUrl(item.src)} alt={item.alt} loading="lazy" />}{item.caption && <figcaption>{item.caption}</figcaption>}</figure>;
 }
 
-function MediaGrid({ media }) {
-  return <div className={`media-grid media-count-${media.length}`}>{media.map((item, index) => <MediaItem item={item} key={item.src || item.needed || index} />)}</div>;
+function MediaGrid({ media, layout }) {
+  return <div className={`media-grid media-count-${media.length}${layout ? ` media-layout-${layout}` : ""}`}>{media.map((item, index) => <MediaItem item={item} key={item.src || item.needed || index} />)}</div>;
 }
 
 function Section({ section }) {
   return (
     <section className={`case-section${section.isNeeded ? " section-needed" : ""}`}>
       <div className="section-copy"><p className="section-number">{section.number}</p><div><h2>{section.title}</h2>{section.body?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div></div>
-      {section.mediaFirst && section.media && <MediaGrid media={section.media} />}
+      {section.mediaFirst && section.media && <MediaGrid media={section.media} layout={section.mediaLayout} />}
       {section.sequence && <ol className={`process-line process-count-${section.sequence.length}`} aria-label={`${section.title} process`}>{section.sequence.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>)}</ol>}
       {section.metrics && <div className="metrics">{section.metrics.map((metric) => <div className="metric" key={metric.value + metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>}
-      {!section.mediaFirst && section.media && <MediaGrid media={section.media} />}
+      {!section.mediaFirst && section.media && <MediaGrid media={section.media} layout={section.mediaLayout} />}
     </section>
+  );
+}
+
+function DimsFigure({ src, alt, caption, className = "" }) {
+  return (
+    <figure className={`dims-figure${className ? ` ${className}` : ""}`}>
+      <img src={assetUrl(src)} alt={alt} loading="lazy" />
+      {caption && <figcaption>{caption}</figcaption>}
+    </figure>
+  );
+}
+
+function DimsProjectPage() {
+  return (
+    <main className="project-page dims-page">
+      <header className="dims-hero">
+        <div className="dims-hero-copy">
+          <p className="eyebrow">Biomedical Engineering · Bioseparation · Experimental Research</p>
+          <h1>Culture-Free Pathogen Isolation for Sepsis Diagnostics</h1>
+          <p className="dek">Engineering a density-shift immunocapture workflow to isolate rare bloodstream bacteria from complex samples and prepare them for Raman identification.</p>
+          <div className="dims-metadata" aria-label="Project metadata">
+            <span>MIT · Karnik Lab × Tadesse Lab</span>
+            <span>2025–Present</span>
+            <span>Role · Experimental system design &amp; validation</span>
+          </div>
+        </div>
+        <DimsFigure
+          className="dims-hero-figure"
+          src="/images/dims/dims-system-workflow.png"
+          alt="End-to-end DIMS diagnostic workflow from bacterial capture and density-based separation to Raman spectroscopy and identification"
+          caption="Collaborative end-to-end diagnostic workflow spanning bacterial capture, density-based separation, Raman spectroscopy, and identification. My work focuses on capture, separation, recovery, experimental system design, and Raman sample preparation."
+        />
+      </header>
+
+      <div className="dims-case-study">
+        <section className="dims-section">
+          <div className="dims-copy">
+            <h2>Engineering challenge</h2>
+            <p>Bloodstream pathogens can occur at extremely low concentrations within a background dominated by blood cells and other biological components. The sample-preparation system therefore has to selectively capture bacteria, preserve the conjugates during density separation, recover them with minimal loss, and deliver a sample compatible with downstream Raman spectroscopy.</p>
+          </div>
+          <div className="dims-card-grid dims-card-grid-four">
+            <article><h3>Selective capture</h3><p>Bind target bacteria while minimizing nonspecific background.</p></article>
+            <article><h3>Density stability</h3><p>Keep bead–bacteria conjugates intact during centrifugation.</p></article>
+            <article><h3>Controlled recovery</h3><p>Retrieve bacteria from a moving density interface without introducing large operator-dependent losses.</p></article>
+            <article><h3>Raman compatibility</h3><p>Preserve bacterial molecular signatures for downstream optical identification.</p></article>
+          </div>
+        </section>
+
+        <section className="dims-section">
+          <div className="dims-copy"><h2>How DIMS works</h2></div>
+          <ol className="dims-steps" aria-label="DIMS workflow">
+            <li><span>01</span><h3>Capture</h3><p>Antibody-functionalized particles bind target bacteria.</p></li>
+            <li><span>02</span><h3>Density shift</h3><p>Bead–bacterium conjugates acquire a different effective density from unbound bacteria and background components.</p></li>
+            <li><span>03</span><h3>Separation &amp; recovery</h3><p>Centrifugation localizes the conjugates near a defined liquid-density interface for extraction.</p></li>
+            <li><span>04</span><h3>Raman preparation</h3><p>Recovered conjugates are prepared for downstream single-cell Raman measurement.</p></li>
+          </ol>
+        </section>
+
+        <section className="dims-section dims-split dims-capture-platform">
+          <DimsFigure
+            src="/images/dims/dims-bead-platform.png"
+            alt="Silica and gold-coated silica bead platforms with antibody-based bacterial capture chemistry"
+            caption="Silica and gold-coated silica bead platforms with antibody-based capture chemistry."
+          />
+          <div className="dims-split-copy">
+            <p className="dims-kicker">Engineering the capture platform</p>
+            <h2>Improving capture without sacrificing separation stability</h2>
+            <p>I experimentally evaluated particle-based capture strategies for use in the density-gradient workflow. The system must provide strong bacterial binding while remaining stable under DIMS centrifugation conditions and compatible with downstream optical measurement.</p>
+            <div className="dims-result-card">
+              <strong>90.0%</strong>
+              <span><em>E. coli</em> capture with Au-PEG beads</span>
+              <small>22.8% with plain silica beads<br />Matched 30-minute incubation</small>
+            </div>
+            <DimsFigure
+              className="dims-inline-chart"
+              src="/images/dims/dims-aupeg-capture.png"
+              alt="Comparison of E. coli capture using Au-PEG beads and plain silica beads after a matched 30-minute incubation"
+            />
+          </div>
+        </section>
+
+        <section className="dims-section dims-split dims-density-section">
+          <div className="dims-split-copy">
+            <h2>Capture must survive the separation environment</h2>
+            <p>A high capture efficiency is not useful if bead–bacteria conjugates dissociate during density-gradient centrifugation. Antibody-based capture was therefore evaluated in both buffer and 1.2 g/mL density media.</p>
+            <p>Comparable capture between the two conditions showed that antibody-mediated binding remained stable under the DIMS separation conditions.</p>
+          </div>
+          <DimsFigure
+            className="dims-small-chart"
+            src="/images/dims/dims-density-stability.png"
+            alt="Capture efficiency comparison in buffer and 1.2 grams per milliliter density media"
+            caption="Capture efficiency in buffer versus 1.2 g/mL density media."
+          />
+        </section>
+
+        <section className="dims-section">
+          <div className="dims-copy">
+            <h2>Where does the sample go?</h2>
+            <p>I use step-by-step recovery measurements to identify where bacteria are lost across capture, density localization, interface retrieval, and handling.</p>
+          </div>
+          <DimsFigure
+            className="dims-wide-figure"
+            src="/images/dims/dims-separation-profile.png"
+            alt="DIMS separation and recovery profile showing bacterial distribution and losses through the workflow"
+          />
+          <div className="dims-metrics">
+            <article><strong>13.95%</strong><span>End-to-end DIMS recovery in PBS</span></article>
+            <article><strong>5.40%</strong><span>Preliminary end-to-end recovery in 10% whole blood</span></article>
+          </div>
+          <p className="dims-followup">These measurements turn the workflow into an engineering loss budget. Current optimization focuses on particle surface properties, density-media distribution, centrifugation conditions, interface recovery, and nonspecific adhesion.</p>
+        </section>
+
+        <section className="dims-section">
+          <div className="dims-copy">
+            <p className="dims-kicker">Current development</p>
+            <h2>Reducing operator-dependent recovery</h2>
+            <p>One current engineering focus is a camera-guided extraction module that locates and tracks moving density interfaces during aspiration. The goal is to improve recovery repeatability by replacing subjective manual interface selection with a more controlled extraction process.</p>
+          </div>
+          <div className="dims-card-grid dims-card-grid-three">
+            <article><h3>Imaging</h3><p>Locate the density interface during recovery.</p></article>
+            <article><h3>Tracking</h3><p>Follow interface motion during aspiration.</p></article>
+            <article><h3>Extraction</h3><p>Control sampling position to reduce operator-dependent variation.</p></article>
+          </div>
+        </section>
+
+        <section className="dims-section dims-split dims-raman-section">
+          <DimsFigure
+            src="/images/dims/dims-raman.png"
+            alt="Representative bead-bound E. coli image and Raman spectra compared with bacteria-only and bead-only controls"
+            caption="Representative bead-bound E. coli imaging and Raman spectra compared with bacteria-only and bead-only controls."
+          />
+          <div className="dims-split-copy">
+            <h2>Isolation must preserve the signal</h2>
+            <p>The separation step is only useful if captured bacteria remain compatible with downstream identification. Raman measurements from individual Au-PEG bead–<em>E. coli</em> conjugates retain identifiable bacterial spectral features, while bead-only controls allow particle background to be distinguished from the bacterial signal.</p>
+            <p className="dims-highlight">Sample preparation and detection must be designed as one system.</p>
+          </div>
+        </section>
+
+        <section className="dims-section dims-contribution">
+          <h2>My contribution</h2>
+          <ul>
+            <li>Designing and experimentally validating the integrated mechanical and fluidic workflow for bacterial isolation and downstream optical analysis.</li>
+            <li>Designing bacterial capture and density-separation experiments.</li>
+            <li>Experimentally evaluating silica and gold-coated silica particle platforms.</li>
+            <li>Quantifying capture efficiency, recovery, and losses across the multi-step workflow.</li>
+            <li>Designing controlled experiments to identify failure modes and optimize geometry, operating conditions, material interfaces, and component interactions.</li>
+            <li>Developing a camera-guided interface extraction approach to reduce operator-dependent variation.</li>
+            <li>Preparing recovered samples for downstream Raman measurements.</li>
+            <li>Analyzing experimental data and troubleshooting sources of variability.</li>
+            <li>Developing Raman-spectrum analysis and classification methods as ongoing work.</li>
+          </ul>
+          <div className="dims-collaboration-note"><h3>Collaborative context</h3><p>This project spans pathogen capture, density separation, Raman spectroscopy, and computational analysis. Automated Raman acquisition and portions of the classification workflow are collaborative components rather than my individual contribution.</p></div>
+        </section>
+
+        <section className="dims-section">
+          <div className="dims-copy"><h2>Current engineering questions</h2></div>
+          <div className="dims-card-grid dims-card-grid-four">
+            <article><h3>Recovery</h3><p>How can interface extraction be made more repeatable?</p></article>
+            <article><h3>Surface chemistry</h3><p>How can high capture be maintained while reducing nonspecific binding?</p></article>
+            <article><h3>Process conditions</h3><p>How do centrifugation time, speed, and density distribution affect recovery?</p></article>
+            <article><h3>System integration</h3><p>How can capture, separation, recovery, and optical analysis operate as one reliable workflow?</p></article>
+          </div>
+        </section>
+
+        <section className="dims-section dims-direction">
+          <div className="dims-copy"><h2>Toward rapid culture-free pathogen identification</h2><p>The long-term goal is an integrated sample-preparation workflow that isolates bloodstream pathogens directly from complex samples and prepares them for molecular identification without relying on conventional culture expansion.</p></div>
+        </section>
+      </div>
+
+      <nav className="project-end" aria-label="Case study navigation"><Link to="/">← All work</Link><Link to="/about">About Yuhe →</Link></nav>
+      <Footer />
+    </main>
   );
 }
 
@@ -111,6 +283,7 @@ function ProjectPage() {
   const { slug } = useParams();
   const project = projectBySlug[slug];
   if (!project) return <Navigate to="/" replace />;
+  if (project.slug === "culture-free-pathogen-isolation") return <DimsProjectPage />;
   return (
     <main className={`project-page${researchOrder.includes(project.slug) ? " project-page-research" : ""}`}>
       <header className="project-hero">
