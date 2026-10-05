@@ -15,6 +15,7 @@ const designOrder = [
 ];
 
 const archiveOrder = [
+  "creo-sampling-platform",
   "click-beetle-robot",
   "magzic-organizer",
   "thermal-fluid-research",
@@ -87,6 +88,12 @@ function Home() {
 }
 
 function MediaItem({ item }) {
+  if (item.type === "youtube") return (
+    <figure className="project-figure media-youtube">
+      <iframe src={item.src} title={item.alt} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+      <figcaption>{item.caption}{item.source && <> <a href={item.source.href} target="_blank" rel="noreferrer">{item.source.label}</a></>}</figcaption>
+    </figure>
+  );
   if (item.needed) return <div className="media-needed" role="img" aria-label={`Image needed: ${item.needed}`}><span>[IMAGE NEEDED]</span><p>{item.needed}</p></div>;
   return <figure className={`project-figure${item.size ? ` media-${item.size}` : ""}`}>{item.type === "video" ? <video src={assetUrl(item.src)} poster={assetUrl(item.poster)} controls={false} autoPlay loop muted playsInline preload="auto" aria-label={item.alt} /> : <img src={assetUrl(item.src)} alt={item.alt} loading="lazy" />}{(item.caption || item.source) && <figcaption>{item.caption}{item.source && <>{item.caption ? " " : ""}<a href={item.source.href} target="_blank" rel="noreferrer">{item.source.label}</a></>}</figcaption>}</figure>;
 }

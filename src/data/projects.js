@@ -152,6 +152,7 @@ export const projects = [
       { number: "06", title: "Physical architecture", body: ["The final system links a wearable ring, wireless charger, and companion device. The ring combines a pixel display, programmable RGB light, vibration, and a physical control to make each Scene tangible."], media: [{ src: "/images/touch/15-product-ecosystem.png", alt: "TOUCH ring, charger, and companion character device", caption: "The product ecosystem connects the ring, charger, and companion device." }, { src: "/images/touch/16-detail.png", alt: "Close detail of the TOUCH ring beside its companion device", caption: "A compact display and illuminated inner band communicate graphic and color cues." }, { src: "/images/touch/18-ring-features.png", alt: "Three TOUCH rings with feature callouts", caption: "Switch, pixel display, RGB light, and vibration unit are integrated into the wearable." }] },
       { number: "07", title: "Designed for everyday presence", body: ["The product was developed to sit quietly in domestic environments and to feel wearable in ordinary phone interactions, rather than becoming another attention-demanding screen."], media: [{ src: "/images/touch/17-home-context.png", alt: "TOUCH product ecosystem on a softly lit side table", caption: "The companion device and charger are designed to live unobtrusively at home." }, { src: "/images/touch/19-in-use.png", alt: "TOUCH ring shown during phone use and interpersonal moments", caption: "Wearable cues extend digital communication into everyday physical moments." }] },
       { number: "08", title: "Outcome", body: ["Doki was published as first-author work at IEEE Intelligent Environments 2022. TOUCH was published with Yuhe Cui as a co-author at ACM PETRA 2023."] },
+      {"number":"09","title":"TOUCH project video","media":[{"type":"youtube","src":"https://www.youtube-nocookie.com/embed/8ps0NIE1D0c","alt":"TOUCH multisensory communication project video","caption":"TOUCH — multisensory wearable communication.","source":{"href":"https://youtu.be/8ps0NIE1D0c","label":"Watch on YouTube"}}]},
     ],
   },
   {
@@ -268,8 +269,43 @@ export const projects = [
       { number: "07", title: "Material + manufacturing", body: ["The main form was vacuum-formed from white styrene. ABS clips were 3D printed, the metal board was cut and finished, and the parts were assembled and packaged as one product."], sequence: ["Vacuum forming", "Cutting + trimming", "Metal fabrication", "3D printing", "Assembly"], media: [{ src: "/images/magzic/manufacturing.webp", alt: "MagZic manufacturing photographs showing formed parts, cutting, metal work, and assembly", caption: "A compact production sequence assembled from the original process photographs." }] },
       { number: "08", title: "Final product", body: ["The finished organizer holds five bags beneath a storage bin, keeping their contents visible while freeing shelf area above and around them."], media: [{ src: "/images/magzic/product-context.webp", alt: "Final MagZic organizer installed in a refrigerator with cans above and food bags below", caption: "The final product in context." }, { src: "/images/magzic/product-detail.webp", alt: "Close detail of the MagZic clip array beneath the refrigerator bin", caption: "Five independently removable clips organize bags without occupying the bin." }] },
       { number: "09", title: "Reflection", body: ["Building and testing the product showed that manufacturability, perceived quality, mechanism design, and visual refinement cannot be separated. A next iteration would improve quality control and the magnetic connection while planning production earlier to reduce unit cost."] },
+      {"number":"10","title":"MagZic project video","media":[{"type":"youtube","src":"https://www.youtube-nocookie.com/embed/mDD90LssIIg","alt":"MagZic magnetic refrigerator organizer project video","caption":"MagZic — magnetic refrigerator organizer.","source":{"href":"https://youtu.be/mDD90LssIIg","label":"Watch on YouTube"}}]},
     ],
   },
+{
+  "slug": "creo-sampling-platform",
+  "title": "Creo Cam and Linkage Design for a 48-Position Sampling Platform",
+  "shortTitle": "Creo Cam and Linkage Design for a 48-Position Sampling Platform",
+  "year": "Archive",
+  "category": "Mechanical Design · Motion Simulation",
+  "shortDescription": "Creo motion simulation of a sampling platform designed for COVID-19 sample collection. The cam and linkage mechanisms coordinate platform movement through all 48 positions of a 6 × 8 sample plate in sequence.",
+  "role": "Cam and linkage design, motion simulation",
+  "tools": "Creo",
+  "collaborators": null,
+  "heroImage": "https://i.ytimg.com/vi/0GVr6fJk1T0/hqdefault.jpg",
+  "heroAlt": "Preview of the Creo cam and linkage sampling-platform simulation",
+  "sections": [
+    {
+      "number": "01",
+      "title": "Motion simulation",
+      "body": [
+        "The cam and linkage mechanisms coordinate sequential movement through a 6 × 8 sample plate."
+      ],
+      "media": [
+        {
+          "type": "youtube",
+          "src": "https://www.youtube-nocookie.com/embed/0GVr6fJk1T0",
+          "alt": "Creo motion simulation of a 48-position sampling platform",
+          "caption": "Creo motion simulation of a sampling platform designed for COVID-19 sample collection. The cam and linkage mechanisms coordinate platform movement through all 48 positions of a 6 × 8 sample plate in sequence.",
+          "source": {
+            "href": "https://youtu.be/0GVr6fJk1T0",
+            "label": "Watch on YouTube"
+          }
+        }
+      ]
+    }
+  ]
+}
 ];
 
 export const researchArchive = [{ title: "Thermal desalination, droplet evaporation, and pool boiling", description: "Earlier heat-transfer research spanning droplet evaporation, pool boiling, and micro-groove behavior.", status: "Archive" }];
