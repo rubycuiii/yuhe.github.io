@@ -15,9 +15,9 @@ const designOrder = [
 ];
 
 const archiveOrder = [
-  "creo-sampling-platform",
   "click-beetle-robot",
   "magzic-organizer",
+  "creo-sampling-platform",
   "thermal-fluid-research",
 ];
 
